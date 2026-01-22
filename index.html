@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Rescisão de Contrato Portugal 2026</title>
-    
-    <meta name="description" content="Simulador gratuito de rescisão de contrato em Portugal para 2026. Calcule indemnizações, férias e proporcionais de acordo com o Código do Trabalho.">
-    
+
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4525/4525944.png">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6163421497152187" crossorigin="anonymous"></script>
@@ -14,160 +12,319 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root { --primary: #0f172a; --accent: #0369a1; --bg: #f8fafc; --gold: #b45309; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: #334155; padding: 10px; margin: 0; }
-        
-        .container { max-width: 650px; margin: 10px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); position: relative; overflow: hidden; }
-        .container::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--gold)); }
+        :root {
+            --primary: #0f172a;
+            --accent: #0369a1;
+            --bg: #f8fafc;
+            --gold: #b45309;
+        }
 
-        .header-seal { text-align: center; margin-bottom: 15px; color: var(--gold); font-size: 3.5rem; }
-        h1 { font-size: 1.3rem; color: var(--primary); text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .full { grid-column: span 2; }
-        
-        label { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: #475569; }
-        label i { color: var(--gold); width: 16px; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: #334155;
+            padding: 10px;
+            margin: 0;
+        }
 
-        input, select { width: 100%; height: 48px; padding: 0 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; box-sizing: border-box; background: #fff; }
-        
-        .highlight-card { background: #fefce8; border: 1px solid #fef08a; padding: 15px; border-radius: 8px; margin: 5px 0; }
-        
-        button { width: 100%; height: 56px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 20px; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        button:hover { background: #1e293b; transform: translateY(-1px); }
-        
-        #results { margin-top: 25px; display: none; border: 2px solid #e2e8f0; border-radius: 10px; padding: 20px; background: #fff; }
-        .res-line { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.95rem; }
-        .total-box { background: var(--primary); color: white; padding: 20px; border-radius: 8px; text-align: center; font-size: 1.6rem; font-weight: 800; margin-top: 15px; }
-        
-        .footer-legal { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 0.72rem; color: #94a3b8; text-align: center; line-height: 1.4; }
-        .ad-spacer { margin: 20px 0; min-height: 90px; background: #fafafa; border: 1px solid #eee; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #ccc; }
+        .container {
+            max-width: 650px;
+            margin: 10px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
 
-        @media (max-width: 550px) { .grid { grid-template-columns: 1fr; } .full { grid-column: span 1; } }
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+        }
+
+        .header-seal {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--gold);
+            font-size: 3.5rem;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .full {
+            grid-column: span 2;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        label i {
+            color: var(--gold);
+            width: 16px;
+        }
+
+        input, select {
+            width: 100%;
+            height: 48px;
+            padding: 0 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        .highlight-card {
+            background: #fefce8;
+            border: 1px solid #fef08a;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        button {
+            width: 100%;
+            height: 56px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+
+        #results {
+            margin-top: 25px;
+            display: none;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .res-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .total-box {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-top: 15px;
+        }
+
+        .footer-legal {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.72rem;
+            color: #94a3b8;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .ad-spacer {
+            margin: 20px 0;
+            min-height: 90px;
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: #ccc;
+        }
+
+        @media (max-width: 550px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: span 1;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header-seal">
-        <i class="fas fa-certificate"></i>
+    <div class="container">
+        <div class="header-seal">
+            <i class="fas fa-certificate"></i>
+        </div>
+        <h1>Simulador de Rescisão de Contrato</h1>
+
+        <div class="ad-spacer">PUBLICIDADE</div>
+
+        <div class="grid">
+            <div class="full">
+                <label><i class="fas fa-euro-sign"></i> Vencimento Base + Diuturnidades (€)</label>
+                <input type="number" id="vencBase" placeholder="Ex: 1450" inputmode="decimal">
+            </div>
+
+            <div class="full">
+                <label><i class="fas fa-file-contract"></i> Tipo de Cessação e Contrato</label>
+                <select id="tipo">
+                    <optgroup label="Iniciativa do Trabalhador">
+                        <option value="denuncia">Pedido de Demissão (Com Aviso Prévio)</option>
+                        <option value="denuncia_sem_aviso">Pedido de Demissão (SEM Aviso Prévio)</option>
+                        <option value="rescisao_justa">Rescisão com Justa Causa pelo Trabalhador</option>
+                    </optgroup>
+                    <optgroup label="Fim de Contrato (Caducidade)">
+                        <option value="cad_termo_certo">Caducidade: Fim de Contrato a Termo CERTO</option>
+                        <option value="cad_termo_incerto">Caducidade: Fim de Contrato a Termo INCERTO</option>
+                        <option value="cad_reforma">Caducidade por Reforma</option>
+                    </optgroup>
+                    <optgroup label="Iniciativa da Empresa">
+                        <option value="extincao">Despedimento por Extinção de Posto / Coletivo</option>
+                        <option value="ineptidao">Despedimento por Inadaptação</option>
+                        <option value="justa_causa">Despedimento com Justa Causa pela Empresa</option>
+                    </optgroup>
+                    <optgroup label="Outros">
+                        <option value="mutuo_acordo">Revogação por Mútuo Acordo</option>
+                        <option value="periodo_experimental">Denúncia no Período Experimental</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div>
+                <label><i class="fas fa-history"></i> Anos Completos</label>
+                <input type="number" id="anos" value="0" min="0">
+            </div>
+            <div>
+                <label><i class="fas fa-calendar-alt"></i> Meses no Ano Corrente</label>
+                <input type="number" id="meses" value="1" min="1" max="12">
+            </div>
+
+            <div class="full highlight-card">
+                <label><i class="fas fa-umbrella-beach"></i> Dias de Férias não gozados (Anos anteriores)</label>
+                <input type="number" id="fVencidas" value="0">
+            </div>
+
+            <div class="full">
+                <label><i class="fas fa-user-graduate"></i> Horas de Formação em falta (Últimos 3 anos)</label>
+                <input type="number" id="horasForm" value="0">
+            </div>
+        </div>
+
+        <button onclick="calcular()">
+            <i class="fas fa-stamp"></i> CALCULAR ACERTO FINAL
+        </button>
+
+        <div id="results">
+            <div class="res-line"><span><i class="fas fa-balance-scale"></i> Compensação / Indemnização:</span> <span id="r-comp">0,00 €</span></div>
+            <div class="res-line"><span><i class="fas fa-sun"></i> Férias Vencidas + Subsídio:</span> <span id="r-fer-venc">0,00 €</span></div>
+            <div class="res-line"><span><i class="fas fa-percentage"></i> Proporcionais (Férias e Natal):</span> <span id="r-prop">0,00 €</span></div>
+            <div class="res-line"><span><i class="fas fa-graduation-cap"></i> Créditos Formação:</span> <span id="r-form">0,00 €</span></div>
+
+            <div class="total-box">
+                <div style="font-size: 0.7rem; opacity: 0.9; margin-bottom: 5px;">TOTAL BRUTO ESTIMADO</div>
+                <span id="r-total">0,00 €</span>
+            </div>
+            <div class="ad-spacer">PUBLICIDADE</div>
+        </div>
+
+        <div class="footer-legal">
+            Cálculos baseados no Código do Trabalho vigente e orientações da ACT para 2026.
+        </div>
     </div>
-    
-    <h1>Simulador de Rescisão de Contrato</h1>
 
-    <div class="ad-spacer">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-6163421497152187"
-             data-ad-slot="auto"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-    
-    <div class="grid">
-        <div class="full">
-            <label><i class="fas fa-euro-sign"></i> Vencimento Base + Diuturnidades (€)</label>
-            <input type="number" id="vencBase" placeholder="Ex: 1450" inputmode="decimal">
-        </div>
+    <script>
+        function calcular() {
+            const base = parseFloat(document.getElementById('vencBase').value) || 0;
+            const tipo = document.getElementById('tipo').value;
+            const anos = parseInt(document.getElementById('anos').value) || 0;
+            const meses = parseInt(document.getElementById('meses').value) || 1;
+            const fVencidas = parseInt(document.getElementById('fVencidas').value) || 0;
+            const hForm = parseInt(document.getElementById('horasForm').value) || 0;
 
-        <div class="full">
-            <label><i class="fas fa-file-contract"></i> Motivo da Cessação</label>
-            <select id="tipo">
-                <optgroup label="Iniciativa do Trabalhador">
-                    <option value="denuncia">Pedido de Demissão (com aviso prévio)</option>
-                    <option value="rescisao_justa">Rescisão com Justa Causa pelo Trabalhador (Direito a indemnização)</option>
-                </optgroup>
-                <optgroup label="Caducidade">
-                    <option value="cad_termo_emp">Contrato a Termo (Fim do contrato pela Empresa)</option>
-                    <option value="cad_reforma">Caducidade por Reforma</option>
-                </optgroup>
-                <optgroup label="Iniciativa da Empresa">
-                    <option value="extincao">Extinção de Posto ou Colectivo</option>
-                    <option value="justa_causa">Despedimento com Justa Causa (Sem indemnização)</option>
-                </optgroup>
-            </select>
-        </div>
+            if (base <= 0) { alert("Introduza o vencimento base."); return; }
 
-        <div>
-            <label><i class="fas fa-calendar-check"></i> Anos de Casa</label>
-            <input type="number" id="anos" value="0" min="0">
-        </div>
-        <div>
-            <label><i class="fas fa-calendar-day"></i> Meses Trabalhados (este ano)</label>
-            <input type="number" id="meses" value="1" min="1" max="12">
-        </div>
+            let diasComp = 0;
+            // Lógica de compensação atualizada conforme ACT
+            switch(tipo) {
+                case 'cad_termo_certo':
+                case 'cad_termo_incerto':
+                    diasComp = 24; 
+                    break;
+                case 'extincao':
+                case 'ineptidao':
+                    diasComp = 14; 
+                    break;
+                case 'rescisao_justa':
+                    diasComp = 30; 
+                    break;
+                default:
+                    diasComp = 0;
+            }
 
-        <div class="full highlight-card">
-            <label><i class="fas fa-umbrella-beach"></i> Dias de Férias por Gozar (Anos anteriores)</label>
-            <input type="number" id="fVencidas" value="0">
-        </div>
+            const compensacao = (base / 30) * diasComp * (anos + (meses / 12));
+            const valorHora = (base * 12) / (52 * 40);
+            const feriasVencidas = fVencidas * (base / 22) * 2;
+            const propNatal = (base / 12) * meses;
+            const propFerias = ((base / 12) * meses) * 2;
+            const formacao = hForm * valorHora;
 
-        <div class="full">
-            <label><i class="fas fa-graduation-cap"></i> Horas de Formação não recebidas</label>
-            <input type="number" id="horasForm" value="0" placeholder="Máx. 120h (últimos 3 anos)">
-        </div>
-    </div>
+            const total = compensacao + feriasVencidas + propNatal + propFerias + formacao;
+            const eur = (v) => v.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
 
-    <button onclick="calcular()">
-        <i class="fas fa-stamp"></i> CALCULAR VALORES BRUTOS
-    </button>
+            document.getElementById('r-comp').innerText = eur(compensacao);
+            document.getElementById('r-fer-venc').innerText = eur(feriasVencidas);
+            document.getElementById('r-prop').innerText = eur(propNatal + propFerias);
+            document.getElementById('r-form').innerText = eur(formacao);
+            document.getElementById('r-total').innerText = eur(total);
 
-    <div id="results">
-        <div class="res-line"><span><i class="fas fa-balance-scale"></i> Compensação Estimada:</span> <span id="r-comp">0,00 €</span></div>
-        <div class="res-line"><span><i class="fas fa-sun"></i> Férias e Subsídio de Férias:</span> <span id="r-fer-venc">0,00 €</span></div>
-        <div class="res-line"><span><i class="fas fa-gift"></i> Proporcionais (Natal e Férias):</span> <span id="r-prop">0,00 €</span></div>
-        <div class="res-line"><span><i class="fas fa-book"></i> Créditos de Formação:</span> <span id="r-form">0,00 €</span></div>
-        
-        <div class="total-box">
-            <div style="font-size: 0.7rem; opacity: 0.9; margin-bottom: 5px;">TOTAL BRUTO A RECEBER</div>
-            <span id="r-total">0,00 €</span>
-        </div>
-
-        <div class="ad-spacer">ANÚNCIO</div>
-    </div>
-
-    <div class="footer-legal">
-        Simulação baseada no Código do Trabalho 2026. Os valores apresentados são brutos e meramente indicativos.
-    </div>
-</div>
-
-<script>
-    function calcular() {
-        const base = parseFloat(document.getElementById('vencBase').value) || 0;
-        const tipo = document.getElementById('tipo').value;
-        const anos = parseInt(document.getElementById('anos').value) || 0;
-        const meses = parseInt(document.getElementById('meses').value) || 1;
-        const fVencidas = parseInt(document.getElementById('fVencidas').value) || 0;
-        const hForm = parseInt(document.getElementById('horasForm').value) || 0;
-
-        if (base <= 0) { alert("Introduza o seu vencimento base."); return; }
-
-        let diasComp = 0;
-        if (tipo === 'cad_termo_emp') diasComp = 24;
-        else if (tipo === 'extincao') diasComp = 14;
-        else if (tipo === 'rescisao_justa') diasComp = 30;
-
-        const compensacao = (base / 30) * diasComp * (anos + (meses/12));
-        const valorHora = (base * 12) / (52 * 40);
-        const feriasVencidas = fVencidas * (base / 22) * 2;
-        const propNatal = (base / 12) * meses;
-        const propFerias = ((base / 12) * meses) * 2;
-        const formacao = hForm * valorHora;
-
-        const total = compensacao + feriasVencidas + propNatal + propFerias + formacao;
-        const eur = (v) => v.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
-
-        document.getElementById('r-comp').innerText = eur(compensacao);
-        document.getElementById('r-fer-venc').innerText = eur(feriasVencidas);
-        document.getElementById('r-prop').innerText = eur(propNatal + propFerias);
-        document.getElementById('r-form').innerText = eur(formacao);
-        document.getElementById('r-total').innerText = eur(total);
-        
-        document.getElementById('results').style.display = 'block';
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-</script>
+            document.getElementById('results').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>

@@ -3,270 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Compensações Laborais</title>
+    <title>Calculadora de Rescisão de Contrato Portugal 2026</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6163421497152187" crossorigin="anonymous"></script>
+
     <style>
-        :root {
-            --primary: #1e293b;
-            --accent: #0284c7;
-            --bg: #f8fafc;
-            --danger: #be123c;
-        }
+        :root { --primary: #1e293b; --accent: #0284c7; --bg: #f8fafc; --danger: #be123c; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: #334155; padding: 10px; margin: 0; line-height: 1.5; }
+        .container { max-width: 650px; margin: 10px auto; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+        
+        h1 { font-size: 1.4rem; color: var(--primary); text-align: center; margin-bottom: 20px; letter-spacing: -0.025em; }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .full { grid-column: span 2; }
+        
+        label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: #475569; }
+        input, select { width: 100%; height: 48px; padding: 0 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        
+        .card-inner { background: #f1f5f9; padding: 15px; border-radius: 10px; margin: 5px 0; }
+        
+        button { width: 100%; height: 56px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 20px; transition: background 0.2s; }
+        button:hover { background: #0f172a; }
+        
+        #results { margin-top: 25px; display: none; }
+        .res-line { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; }
+        .total-box { background: #f0f9ff; border: 2px solid #bae6fd; color: #0369a1; padding: 20px; border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 800; margin-top: 15px; }
+        
+        .footer-legal { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 0.75rem; color: #94a3b8; text-align: center; }
+        
+        /* Espaço para Anúncios */
+        .ad-spacer { margin: 20px 0; text-align: center; min-height: 90px; background: #fafafa; border: 1px dashed #ddd; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #aaa; }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: #334155;
-            padding: 15px;
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 650px;
-            margin: 10px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 25px;
-            letter-spacing: -0.025em;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .full {
-            grid-column: span 2;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 6px;
-            color: #475569;
-        }
-
-        input, select {
-            width: 100%;
-            height: 48px;
-            padding: 0 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: all 0.2s;
-        }
-
-            input:focus {
-                outline: none;
-                border-color: var(--accent);
-                ring: 2px solid var(--accent);
-            }
-
-        .card-inner {
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 5px 0;
-        }
-
-        button {
-            width: 100%;
-            height: 56px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 25px;
-            transition: background 0.2s;
-        }
-
-            button:hover {
-                background: #0f172a;
-            }
-
-        #results {
-            margin-top: 30px;
-            display: none;
-        }
-
-        .res-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 0.95rem;
-        }
-
-        .total-box {
-            background: #f0f9ff;
-            border: 2px solid #bae6fd;
-            color: #0369a1;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-top: 20px;
-        }
-
-        .footer-legal {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            font-size: 0.75rem;
-            color: #94a3b8;
-            text-align: center;
-        }
-
-        @media (max-width: 550px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .full {
-                grid-column: span 1;
-            }
-        }
+        @media (max-width: 550px) { .grid { grid-template-columns: 1fr; } .full { grid-column: span 1; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Simulador de Acerto de Contas</h1>
+<div class="container">
+    <h1>Simulador de Rescisão de Contrato</h1>
 
-        <div class="grid">
-            <div class="full">
-                <label>Vencimento Base + Diuturnidades (€)</label>
-                <input type="number" id="vencBase" placeholder="Ex: 1300" inputmode="decimal">
-            </div>
-
-            <div class="full">
-                <label>Tipo de Cessação do Contrato</label>
-                <select id="tipo">
-                    <optgroup label="Caducidade">
-                        <option value="cad_termo_emp">Contrato a Termo: Caducidade pelo Empregador (24 dias/ano)</option>
-                        <option value="cad_termo_trab">Contrato a Termo: Caducidade pelo Trabalhador (0 dias)</option>
-                        <option value="cad_reforma">Caducidade por Reforma (Velhice ou Invalidez)</option>
-                        <option value="cad_morte">Caducidade por Morte (Empregador ou Empresa)</option>
-                    </optgroup>
-                    <optgroup label="Despedimento">
-                        <option value="extincao">Extinção de Posto ou Coletivo (14 dias/ano)</option>
-                        <option value="inadaptacao">Inadaptação (14 dias/ano)</option>
-                        <option value="justa_causa">Despedimento com Justa Causa (0 dias)</option>
-                    </optgroup>
-                    <optgroup label="Iniciativa do Trabalhador">
-                        <option value="denuncia">Pedido de Demissão (0 dias)</option>
-                        <option value="rescisao_justa">Rescisão com Justa Causa pelo Trabalhador (30 dias/ano)</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div>
-                <label>Anos Completos</label>
-                <input type="number" id="anos" value="0" min="0">
-            </div>
-            <div>
-                <label>Meses (Ano Corrente)</label>
-                <input type="number" id="meses" value="1" min="1" max="12">
-            </div>
-
-            <div class="full card-inner">
-                <label>Dias de Férias por Gozar (Acumulados)</label>
-                <input type="number" id="fVencidas" value="0">
-            </div>
-
-            <div class="full">
-                <label>Horas de Formação em Falta (Últimos 3 anos)</label>
-                <input type="number" id="horasForm" value="0">
-            </div>
-
-            <div class="full">
-                <label>Regime de Lay-off aplicado?</label>
-                <select id="layoff">
-                    <option value="nao">Não</option>
-                    <option value="sim">Sim (Redução ou Suspensão)</option>
-                </select>
-            </div>
+    <div class="ad-spacer">ESPAÇO PARA ANÚNCIO (AUTO-ADS)</div>
+    
+    <div class="grid">
+        <div class="full">
+            <label>Vencimento Base + Diuturnidades (€)</label>
+            <input type="number" id="vencBase" placeholder="Ex: 1300" inputmode="decimal">
         </div>
 
-        <button onclick="calcular()">Calcular Valores Brutos</button>
-
-        <div id="results">
-            <div class="res-line"><span>Compensação / Indemnização:</span> <span id="r-comp">0,00 €</span></div>
-            <div class="res-line"><span>Férias Vencidas + Subsídio:</span> <span id="r-fer-venc">0,00 €</span></div>
-            <div class="res-line"><span>Proporcionais (Férias e Natal):</span> <span id="r-prop">0,00 €</span></div>
-            <div class="res-line"><span>Créditos de Formação:</span> <span id="r-form">0,00 €</span></div>
-
-            <div class="total-box">
-                <span style="display:block; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 5px; font-weight: 600;">Estimativa Total Bruta</span>
-                <span id="r-total">0,00 €</span>
-            </div>
+        <div class="full">
+            <label>Tipo de Cessação do Contrato</label>
+            <select id="tipo">
+                <optgroup label="Caducidade">
+                    <option value="cad_termo_emp">Contrato a Termo: Caducidade pelo Empregador (24 dias/ano)</option>
+                    <option value="cad_termo_trab">Contrato a Termo: Caducidade pelo Trabalhador (0 dias)</option>
+                    <option value="cad_reforma">Caducidade por Reforma (Velhice ou Invalidez)</option>
+                    <option value="cad_morte">Caducidade por Morte (Empregador ou Empresa)</option>
+                </optgroup>
+                <optgroup label="Despedimento">
+                    <option value="extincao">Extinção de Posto ou Coletivo (14 dias/ano)</option>
+                    <option value="inadaptacao">Inadaptação (14 dias/ano)</option>
+                    <option value="justa_causa">Despedimento com Justa Causa (0 dias)</option>
+                </optgroup>
+                <optgroup label="Iniciativa do Trabalhador">
+                    <option value="denuncia">Pedido de Demissão (0 dias)</option>
+                    <option value="rescisao_justa">Rescisão com Justa Causa pelo Trabalhador (30 dias/ano)</option>
+                </optgroup>
+            </select>
         </div>
 
-        <div class="footer-legal">
-            As fontes de cálculo baseiam-se no Código do Trabalho vigente e orientações da Autoridade para as Condições do Trabalho (ACT) em 2026. Este simulador tem caráter informativo e não substitui o recibo oficial de quitação.
+        <div>
+            <label>Anos Completos</label>
+            <input type="number" id="anos" value="0" min="0">
+        </div>
+        <div>
+            <label>Meses (Ano Corrente)</label>
+            <input type="number" id="meses" value="1" min="1" max="12">
+        </div>
+
+        <div class="full card-inner">
+            <label>Dias de Férias por Gozar (Acumulados)</label>
+            <input type="number" id="fVencidas" value="0">
+        </div>
+
+        <div class="full">
+            <label>Horas de Formação em Falta (Últimos 3 anos)</label>
+            <input type="number" id="horasForm" value="0">
+        </div>
+
+        <div class="full">
+            <label>Regime de Lay-off aplicado?</label>
+            <select id="layoff">
+                <option value="nao">Não</option>
+                <option value="sim">Sim (Redução ou Suspensão)</option>
+            </select>
         </div>
     </div>
 
-    <script>
-        function calcular() {
-            const base = parseFloat(document.getElementById('vencBase').value) || 0;
-            const tipo = document.getElementById('tipo').value;
-            const anos = parseInt(document.getElementById('anos').value) || 0;
-            const meses = parseInt(document.getElementById('meses').value) || 1;
-            const fVencidas = parseInt(document.getElementById('fVencidas').value) || 0;
-            const hForm = parseInt(document.getElementById('horasForm').value) || 0;
-            const isLayoff = document.getElementById('layoff').value;
+    <button onclick="calcular()">Calcular Valores Brutos</button>
 
-            if (base <= 0) { alert("Introduza um valor de vencimento base válido."); return; }
+    <div id="results">
+        <div class="res-line"><span>Compensação / Indemnização:</span> <span id="r-comp">0,00 €</span></div>
+        <div class="res-line"><span>Férias Vencidas + Subsídio:</span> <span id="r-fer-venc">0,00 €</span></div>
+        <div class="res-line"><span>Proporcionais (Férias e Natal):</span> <span id="r-prop">0,00 €</span></div>
+        <div class="res-line"><span>Créditos de Formação:</span> <span id="r-form">0,00 €</span></div>
+        
+        <div class="total-box">
+            <span id="r-total">0,00 €</span>
+        </div>
+        
+        <div class="ad-spacer">ESPAÇO PARA ANÚNCIO (RESULTADOS)</div>
+    </div>
 
-            // Dias de compensação por tipo
-            let dias = 0;
-            if (tipo === 'cad_termo_emp') dias = 24;
-            else if (tipo === 'extincao' || tipo === 'inadaptacao') dias = 14;
-            else if (tipo === 'rescisao_justa') dias = 30; // Média legal entre 15-45
-            else if (tipo === 'cad_morte') dias = 12;
+    <div class="footer-legal">
+        As fontes de cálculo baseiam-se no Código do Trabalho vigente e orientações da Autoridade para as Condições do Trabalho (ACT). Este simulador tem caráter informativo.
+    </div>
+</div>
 
-            // Cálculos (Compensação: dias corridos/30; Férias: dias úteis/22)
-            const compensacao = (base / 30) * dias * (anos + (meses / 12));
-            const vHora = (base * 12) / (52 * 40);
+<script>
+    function calcular() {
+        const base = parseFloat(document.getElementById('vencBase').value) || 0;
+        const tipo = document.getElementById('tipo').value;
+        const anos = parseInt(document.getElementById('anos').value) || 0;
+        const meses = parseInt(document.getElementById('meses').value) || 1;
+        const fVencidas = parseInt(document.getElementById('fVencidas').value) || 0;
+        const hForm = parseInt(document.getElementById('horasForm').value) || 0;
 
-            // Férias acumuladas de anos anteriores
-            const feriasVencidas = fVencidas * (base / 22) * 2;
+        if (base <= 0) { alert("Introduza um valor válido."); return; }
 
-            // Proporcionais do ano da saída (Natal + Férias/Subsídio)
-            const propNatal = (base / 12) * meses;
-            const propFerias = ((base / 12) * meses) * 2;
+        let dias = 0;
+        if (tipo === 'cad_termo_emp') dias = 24;
+        else if (tipo === 'extincao' || tipo === 'inadaptacao') dias = 14;
+        else if (tipo === 'rescisao_justa') dias = 30;
+        else if (tipo === 'cad_morte') dias = 12;
 
-            const formacao = hForm * vHora;
-            const total = compensacao + feriasVencidas + propNatal + propFerias + formacao;
+        const compensacao = (base / 30) * dias * (anos + (meses/12));
+        const vHora = (base * 12) / (52 * 40);
+        const feriasVencidas = fVencidas * (base / 22) * 2;
+        const propNatal = (base / 12) * meses;
+        const propFerias = ((base / 12) * meses) * 2;
+        const formacao = hForm * vHora;
+        const total = compensacao + feriasVencidas + propNatal + propFerias + formacao;
 
-            const eur = (v) => v.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
-
-            document.getElementById('r-comp').innerText = eur(compensacao);
-            document.getElementById('r-fer-venc').innerText = eur(feriasVencidas);
-            document.getElementById('r-prop').innerText = eur(propNatal + propFerias);
-            document.getElementById('r-form').innerText = eur(formacao);
-            document.getElementById('r-total').innerText = eur(total);
-
-            document.getElementById('results').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-    </script>
+        const eur = (v) => v.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+        
+        document.getElementById('r-comp').innerText = eur(compensacao);
+        document.getElementById('r-fer-venc').innerText = eur(feriasVencidas);
+        document.getElementById('r-prop').innerText = eur(propNatal + propFerias);
+        document.getElementById('r-form').innerText = eur(formacao);
+        document.getElementById('r-total').innerText = eur(total);
+        
+        document.getElementById('results').style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
 
 </body>
 </html>

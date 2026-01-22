@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Rescisão de Contrato Portugal 2026</title>
     
+    <meta name="description" content="Simulador gratuito de rescisão de contrato em Portugal para 2026. Calcule indemnizações, férias e proporcionais de acordo com o Código do Trabalho.">
+    
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4525/4525944.png">
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6163421497152187" crossorigin="anonymous"></script>
@@ -50,9 +52,18 @@
     <div class="header-seal">
         <i class="fas fa-certificate"></i>
     </div>
+    
     <h1>Simulador de Rescisão de Contrato</h1>
 
-    <div class="ad-spacer">PUBLICIDADE</div>
+    <div class="ad-spacer">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6163421497152187"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
     
     <div class="grid">
         <div class="full">
@@ -61,72 +72,63 @@
         </div>
 
         <div class="full">
-            <label><i class="fas fa-file-contract"></i> Tipo de Cessação do Contrato</label>
+            <label><i class="fas fa-file-contract"></i> Motivo da Cessação</label>
             <select id="tipo">
                 <optgroup label="Iniciativa do Trabalhador">
-                    <option value="denuncia">Pedido de Demissão (Denúncia com Aviso Prévio)</option>
-                    <option value="rescisao_justa">Rescisão com Justa Causa pelo Trabalhador (15-45 dias/ano)</option>
-                    <option value="denuncia_sem_aviso">Pedido de Demissão SEM Aviso Prévio (Pode haver desconto)</option>
+                    <option value="denuncia">Pedido de Demissão (com aviso prévio)</option>
+                    <option value="rescisao_justa">Rescisão com Justa Causa pelo Trabalhador (Direito a indemnização)</option>
                 </optgroup>
                 <optgroup label="Caducidade">
-                    <option value="cad_termo_emp">Caducidade Contrato a Termo (Empresa - 24 dias/ano)</option>
+                    <option value="cad_termo_emp">Contrato a Termo (Fim do contrato pela Empresa)</option>
                     <option value="cad_reforma">Caducidade por Reforma</option>
-                    <option value="cad_morte">Caducidade por Morte de Empregador</option>
                 </optgroup>
                 <optgroup label="Iniciativa da Empresa">
-                    <option value="extincao">Extinção de Posto / Colectivo (14 dias/ano)</option>
-                    <option value="justa_causa">Despedimento com Justa Causa pela Empresa (0 dias)</option>
+                    <option value="extincao">Extinção de Posto ou Colectivo</option>
+                    <option value="justa_causa">Despedimento com Justa Causa (Sem indemnização)</option>
                 </optgroup>
             </select>
         </div>
 
         <div>
-            <label><i class="fas fa-history"></i> Anos Completos</label>
+            <label><i class="fas fa-calendar-check"></i> Anos de Casa</label>
             <input type="number" id="anos" value="0" min="0">
         </div>
         <div>
-            <label><i class="fas fa-calendar-alt"></i> Meses no Ano Corrente</label>
+            <label><i class="fas fa-calendar-day"></i> Meses Trabalhados (este ano)</label>
             <input type="number" id="meses" value="1" min="1" max="12">
         </div>
 
         <div class="full highlight-card">
-            <label><i class="fas fa-umbrella-beach"></i> Dias de Férias não gozados (Anos anteriores)</label>
+            <label><i class="fas fa-umbrella-beach"></i> Dias de Férias por Gozar (Anos anteriores)</label>
             <input type="number" id="fVencidas" value="0">
         </div>
 
         <div class="full">
-            <label><i class="fas fa-user-graduate"></i> Horas de Formação em falta (Últimos 3 anos)</label>
-            <input type="number" id="horasForm" value="0">
-        </div>
-
-        <div class="full">
-            <label><i class="fas fa-clock"></i> Estava em Regime de Lay-off?</label>
-            <select id="layoff">
-                <option value="nao">Não</option>
-                <option value="sim">Sim (Suspensão ou Redução)</option>
-            </select>
+            <label><i class="fas fa-graduation-cap"></i> Horas de Formação não recebidas</label>
+            <input type="number" id="horasForm" value="0" placeholder="Máx. 120h (últimos 3 anos)">
         </div>
     </div>
 
     <button onclick="calcular()">
-        <i class="fas fa-stamp"></i> CALCULAR ACERTO FINAL
+        <i class="fas fa-stamp"></i> CALCULAR VALORES BRUTOS
     </button>
 
     <div id="results">
-        <div class="res-line"><span><i class="fas fa-balance-scale"></i> Compensação / Indemnização:</span> <span id="r-comp">0,00 €</span></div>
-        <div class="res-line"><span><i class="fas fa-sun"></i> Férias Vencidas + Subsídio:</span> <span id="r-fer-venc">0,00 €</span></div>
-        <div class="res-line"><span><i class="fas fa-percentage"></i> Proporcionais (Férias e Natal):</span> <span id="r-prop">0,00 €</span></div>
-        <div class="res-line"><span><i class="fas fa-graduation-cap"></i> Créditos Formação:</span> <span id="r-form">0,00 €</span></div>
+        <div class="res-line"><span><i class="fas fa-balance-scale"></i> Compensação Estimada:</span> <span id="r-comp">0,00 €</span></div>
+        <div class="res-line"><span><i class="fas fa-sun"></i> Férias e Subsídio de Férias:</span> <span id="r-fer-venc">0,00 €</span></div>
+        <div class="res-line"><span><i class="fas fa-gift"></i> Proporcionais (Natal e Férias):</span> <span id="r-prop">0,00 €</span></div>
+        <div class="res-line"><span><i class="fas fa-book"></i> Créditos de Formação:</span> <span id="r-form">0,00 €</span></div>
         
         <div class="total-box">
-            <div style="font-size: 0.7rem; opacity: 0.9; margin-bottom: 5px;">TOTAL BRUTO ESTIMADO</div>
+            <div style="font-size: 0.7rem; opacity: 0.9; margin-bottom: 5px;">TOTAL BRUTO A RECEBER</div>
             <span id="r-total">0,00 €</span>
         </div>
-        <div class="ad-spacer">PUBLICIDADE</div>
+
+        <div class="ad-spacer">ANÚNCIO</div>
     </div>
 
     <div class="footer-legal">
-        As fontes de cálculo baseiam-se no Código do Trabalho vigente e orientações da Autoridade para as Condições do Trabalho (ACT) para 2026.
+        Simulação baseada no Código do Trabalho 2026. Os valores apresentados são brutos e meramente indicativos.
     </div>
 </div>
 
@@ -139,14 +141,12 @@
         const fVencidas = parseInt(document.getElementById('fVencidas').value) || 0;
         const hForm = parseInt(document.getElementById('horasForm').value) || 0;
 
-        if (base <= 0) { alert("Introduza o vencimento base."); return; }
+        if (base <= 0) { alert("Introduza o seu vencimento base."); return; }
 
         let diasComp = 0;
-        // Lógica de compensação atualizada
         if (tipo === 'cad_termo_emp') diasComp = 24;
         else if (tipo === 'extincao') diasComp = 14;
-        else if (tipo === 'rescisao_justa') diasComp = 30; // Valor médio
-        else if (tipo === 'cad_morte') diasComp = 12;
+        else if (tipo === 'rescisao_justa') diasComp = 30;
 
         const compensacao = (base / 30) * diasComp * (anos + (meses/12));
         const valorHora = (base * 12) / (52 * 40);

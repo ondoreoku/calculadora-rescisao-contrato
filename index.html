@@ -3,164 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Rescisão de Contrato 2026</title>
+    <title>Calculadora de Rescisão de Contrato 2026 | Direitos do Trabalhador</title>
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23059669'%3E%3Cpath d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E">
+    
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6163421497152187" crossorigin="anonymous"></script>
 </head>
 <body>
-      <div class="container">
+    <nav class="navbar-global">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Financeiro <span style="color: var(--primary);">2026</span></a>
+            <ul class="nav-links">
+                <li><a href="https://salarioliquido.vercel.app/">Salário</a></li>
+                <li><a href="https://simulador-credito-habitacao-2026.vercel.app/">Crédito</a></li>
+                <li><a href="https://calculadora-rescisao-contrato.vercel.app/" class="active">Rescisão</a></li>
+                <li><a href="https://simulador-subsidio-desemprego.vercel.app/">Desemprego</a></li>
+            </ul>
         </div>
-</head>
-<body>
-<nav class="navbar-global">
-    <div class="nav-container">
-        <a href="/" class="nav-logo">Financeiro <span style="color: #059669;">2026</span></a>
-        <ul class="nav-links">
-            <li><a href="https://salarioliquido.vercel.app/" id="nav-salario">Salário</a></li>
-            <li><a href="https://simulador-credito-habitacao-2026.vercel.app/" id="nav-credito">Crédito</a></li>
-            <li><a href="https://calculadora-rescisao-contrato.vercel.app/" id="nav-rescisao">Rescisão</a></li>
-            <li><a href="https://simulador-subsidio-desemprego.vercel.app/" id="nav-desemprego">Desemprego</a></li>
-        </ul>
-    </div>
-</nav>
+    </nav>
+
     <div class="container">
-        <div class="header-seal">
-            <i class="fas fa-certificate"></i>
-        </div>
-        <h1>Simulador de Rescisão de Contrato</h1>
+        <header style="text-align: center; margin-bottom: 40px;">
+            <h1>Calculadora de Rescisão de Contrato 2026</h1>
+            <p>Calcule os seus direitos: proporcionais de férias, Natal e dias de férias não gozados.</p>
+        </header>
 
-        <div class="ad-spacer">PUBLICIDADE</div>
-
-        <div class="grid">
-            <div class="full">
-                <label><i class="fas fa-euro-sign"></i> Vencimento Base Mensal (€)</label>
-                <input type="number" id="vencBase" placeholder="Ex: 1200" inputmode="decimal">
+        <section class="card">
+            <div class="grid">
+                <div class="input-group">
+                    <label>Salário Bruto Mensal (€)</label>
+                    <input type="number" id="base" value="1200">
+                </div>
+                <div class="input-group">
+                    <label>Data de Saída (Mês)</label>
+                    <select id="mesSaida">
+                        <option value="1">Janeiro</option>
+                        <option value="6">Junho</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Férias não gozadas (Dias)</label>
+                    <input type="number" id="feriasNaoGozadas" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Tipo de Rescisão</label>
+                    <select id="tipoRescisao">
+                        <option value="caducidade">Caducidade (Fim de Contrato)</option>
+                        <option value="mutuo">Mútuo Acordo</option>
+                        <option value="justaCausa">Despedimento Coletivo</option>
+                    </select>
+                </div>
             </div>
 
-            <div>
-                <label><i class="fas fa-utensils"></i> Subsídio Refeição/Dia (€)</label>
-                <input type="number" id="subVal" value="9.60" step="0.10">
+            <button class="btn-main" onclick="calcularRescisao()">Calcular Compensação</button>
+
+            <div id="results" class="results-area" style="display: none; margin-top: 25px;">
+                <div class="grid-res">
+                    <div class="res-card">
+                        <small>Total Bruto Est.</small>
+                        <div id="out-total" class="big-val"></div>
+                    </div>
+                    <div class="res-card">
+                        <small>Proporcionais Natal/Férias</small>
+                        <div id="out-prop" class="big-val" style="color: #3b82f6; font-size: 1.2rem;"></div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div>
-                <label>Tipo de Recebimento</label>
-                <select id="subTipo">
-                    <option value="cartao">Cartão (Isento até 9.60€)</option>
-                    <option value="dinheiro">Dinheiro (Isento até 6.00€)</option>
-                </select>
-            </div>
+        <article class="card info-content">
+            <h2>Quais são os seus direitos ao sair da empresa em 2026?</h2>
+            <p>Ao cessar um contrato de trabalho em Portugal, o trabalhador tem direito a receber um conjunto de valores que visam compensar o trabalho efetuado e as prestações que não foram gozadas até à data da rescisão.</p>
+            
+            
 
-            <div class="full">
-                <label><i class="fas fa-file-contract"></i> Motivo da Cessação</label>
-                <select id="tipo">
-                    <optgroup label="Iniciativa do Trabalhador">
-                        <option value="denuncia">Pedido de Demissão (Com Aviso Prévio)</option>
-                        <option value="denuncia_sem_aviso">Pedido de Demissão (SEM Aviso Prévio)</option>
-                        <option value="rescisao_justa">Rescisão com Justa Causa (Trabalhador)</option>
-                    </optgroup>
-                    <optgroup label="Fim de Contrato (Caducidade)">
-                        <option value="cad_termo_certo">Caducidade: Fim de Contrato a Termo Certo</option>
-                        <option value="cad_termo_incerto">Caducidade: Fim de Contrato a Termo Incerto</option>
-                        <option value="cad_reforma">Caducidade por Reforma</option>
-                    </optgroup>
-                    <optgroup label="Iniciativa da Empresa">
-                        <option value="extincao">Despedimento por Extinção de Posto / Coletivo</option>
-                        <option value="justa_causa">Despedimento com Justa Causa (Empresa)</option>
-                    </optgroup>
-                </select>
-            </div>
+            <h3>Proporcionais de Subsídios</h3>
+            <p>Tem direito a receber o valor proporcional do <strong>Subsídio de Natal</strong> e do <strong>Subsídio de Férias</strong> correspondente aos meses trabalhados no ano da cessação. Se sair em Junho (mês 6), terá direito a 6/12 de cada um destes subsídios.</p>
 
-            <div>
-                <label><i class="fas fa-history"></i> Anos na Empresa</label>
-                <input type="number" id="anos" value="0" min="0">
-            </div>
-            <div>
-                <label><i class="fas fa-calendar-alt"></i> Meses trabalhados este ano</label>
-                <input type="number" id="meses" value="1" min="1" max="12">
-            </div>
+            <h3>Férias não Gozadas</h3>
+            <p>Se tem dias de férias acumulados que não gozou, a empresa é obrigada a pagar o valor desses dias, acrescido do respetivo subsídio de férias. Este simulador considera o valor diário do seu salário para calcular este montante com precisão.</p>
 
-            <div class="full highlight-card">
-                <label><i class="fas fa-umbrella-beach"></i> Dias de Férias não gozados</label>
-                <input type="number" id="fVencidas" value="0">
-            </div>
-
-            <div class="full">
-                <label><i class="fas fa-user-graduate"></i> Horas de Formação em falta (3 anos)</label>
-                <input type="number" id="horasForm" value="0">
-            </div>
-        </div>
-
-        <button onclick="calcular()">
-            <i class="fas fa-stamp"></i> CALCULAR VALORES FINAIS
-        </button>
-
-        <div id="results">
-            <div class="res-line"><span>Compensação / Indemnização:</span> <span id="r-comp">0,00 €</span></div>
-            <div class="res-line"><span>Férias não gozadas + Subsídio:</span> <span id="r-fer-venc">0,00 €</span></div>
-            <div class="res-line"><span>Proporcionais (Natal e Férias):</span> <span id="r-prop">0,00 €</span></div>
-            <div class="res-line"><span>Créditos de Formação:</span> <span id="r-form">0,00 €</span></div>
-            <div class="res-line"><span>Último mês (Estimativa c/ subsídio):</span> <span id="r-mes">0,00 €</span></div>
-
-            <div class="total-box">
-                <div style="font-size: 0.7rem; opacity: 0.9; margin-bottom: 5px;">TOTAL BRUTO ESTIMADO</div>
-                <span id="r-total">0,00 €</span>
-            </div>
-            <div class="ad-spacer">PUBLICIDADE</div>
-        </div>
-
-        <div class="footer-legal">
-            As fontes de cálculo baseiam-se no Código do Trabalho vigente e orientações da Autoridade para as Condições do Trabalho (ACT) para 2026.
-        </div>
-    </div>
-
-    <script>
-        function calcular() {
-            const base = parseFloat(document.getElementById('vencBase').value) || 0;
-            const subVal = parseFloat(document.getElementById('subVal').value) || 0;
-            const subTipo = document.getElementById('subTipo').value;
-            const tipo = document.getElementById('tipo').value;
-            const anos = parseInt(document.getElementById('anos').value) || 0;
-            const meses = parseInt(document.getElementById('meses').value) || 0;
-            const fVencidas = parseInt(document.getElementById('fVencidas').value) || 0;
-            const hForm = parseInt(document.getElementById('horasForm').value) || 0;
-
-            if (base <= 0) { alert("Introduza o vencimento base."); return; }
-
-            // 1. Compensação
-            let diasComp = 0;
-            if (tipo === 'cad_termo_certo' || tipo === 'cad_termo_incerto') diasComp = 24;
-            else if (tipo === 'extincao') diasComp = 14;
-            else if (tipo === 'rescisao_justa') diasComp = 30;
-
-            const compensacao = (base / 30) * diasComp * (anos + (meses / 12));
-
-            // 2. Férias e Proporcionais
-            const valorDia = base / 22;
-            const feriasVencidas = fVencidas * valorDia * 2; 
-            const propNatal = (base / 12) * meses;
-            const propFerias = (base / 12) * meses * 2; 
-
-            // 3. Formação
-            const valorHora = (base * 12) / (52 * 40);
-            const formacao = hForm * valorHora;
-
-            // 4. Último Mês
-            const subMensal = subVal * 22;
-            const ultimoMes = base + subMensal;
-
-            const total = compensacao + feriasVencidas + propNatal + propFerias + formacao;
-            const eur = (v) => v.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
-
-            document.getElementById('r-comp').innerText = eur(compensacao);
-            document.getElementById('r-fer-venc').innerText = eur(feriasVencidas);
-            document.getElementById('r-prop').innerText = eur(propNatal + propFerias);
-            document.getElementById('r-form').innerText = eur(formacao);
-            document.getElementById('r-mes').innerText = eur(ultimoMes);
-            document.getElementById('r-total').innerText = eur(total + ultimoMes);
-
-            document.getElementById('results').style.display = 'block';
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        }
-    </script>
-</body>
-</html>
+            <h3>Indemnização por Caducidade</h3>
+            <p>Em contratos a termo que chegam ao fim por iniciativa do empregador, pode haver lugar a uma indemnização. Em 2026, as regras de compensação variam entre 12 a 24 dias de salário base por cada ano completo de trabalho, dependendo da antiguidade e do tipo de contrato.</

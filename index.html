@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Rescisão de Contrato 2026 | Direitos do Trabalhador</title>
-    
+    <title>Calculadora Rescisão Contrato 2026 | Direitos e Indemnização</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23059669'%3E%3Cpath d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E">
-    
     <link rel="stylesheet" href="style.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6163421497152187" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar-global">
@@ -24,66 +21,79 @@
     </nav>
 
     <div class="container">
-        <header style="text-align: center; margin-bottom: 40px;">
-            <h1>Calculadora de Rescisão de Contrato 2026</h1>
-            <p>Calcule os seus direitos: proporcionais de férias, Natal e dias de férias não gozados.</p>
+        <header style="text-align: center; margin-bottom: 30px;">
+            <h1>Calculadora de Rescisão de Contrato</h1>
+            <p>Simulação completa de compensações, proporcionais e direitos laborais em 2026.</p>
         </header>
 
         <section class="card">
             <div class="grid">
                 <div class="input-group">
-                    <label>Salário Bruto Mensal (€)</label>
+                    <label>Vencimento Base Bruto (€)</label>
                     <input type="number" id="base" value="1200">
                 </div>
                 <div class="input-group">
-                    <label>Data de Saída (Mês)</label>
-                    <select id="mesSaida">
-                        <option value="1">Janeiro</option>
-                        <option value="6">Junho</option>
-                        <option value="12">Dezembro</option>
+                    <label>Tipo de Contrato</label>
+                    <select id="tipoContrato">
+                        <option value="termo">Contrato a Termo Certo</option>
+                        <option value="semTermo">Contrato Sem Termo (Efetivo)</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>Férias não gozadas (Dias)</label>
+                    <label>Data de Início</label>
+                    <input type="date" id="dataInicio" value="2024-01-01">
+                </div>
+                <div class="input-group">
+                    <label>Data de Fim (Previsão)</label>
+                    <input type="date" id="dataFim" value="2026-06-30">
+                </div>
+                <div class="input-group">
+                    <label>Dias de Férias não gozados</label>
                     <input type="number" id="feriasNaoGozadas" value="0">
                 </div>
                 <div class="input-group">
-                    <label>Tipo de Rescisão</label>
-                    <select id="tipoRescisao">
+                    <label>Motivo da Saída</label>
+                    <select id="motivo">
                         <option value="caducidade">Caducidade (Fim de Contrato)</option>
-                        <option value="mutuo">Mútuo Acordo</option>
-                        <option value="justaCausa">Despedimento Coletivo</option>
+                        <option value="despedimento">Despedimento Coletivo/Extinção</option>
+                        <option value="iniciativa_trabalhador">Iniciativa do Trabalhador (Sem justa causa)</option>
                     </select>
                 </div>
             </div>
 
-            <button class="btn-main" onclick="calcularRescisao()">Calcular Compensação</button>
+            <button class="btn-main" onclick="calcularTudo()">Calcular Direitos Totais</button>
 
             <div id="results" class="results-area" style="display: none; margin-top: 25px;">
+                <div class="res-card" style="background: #ecfdf5; margin-bottom: 15px; border: 1px solid #10b981;">
+                    <small>Estimativa Total Líquida a Receber</small>
+                    <div id="out-total" class="big-val" style="font-size: 2.4rem;"></div>
+                </div>
                 <div class="grid-res">
                     <div class="res-card">
-                        <small>Total Bruto Est.</small>
-                        <div id="out-total" class="big-val"></div>
+                        <small>Indemnização (Antiguidade)</small>
+                        <div id="out-indeminizacao" style="font-weight: 700; color: #374151;"></div>
                     </div>
                     <div class="res-card">
-                        <small>Proporcionais Natal/Férias</small>
-                        <div id="out-prop" class="big-val" style="color: #3b82f6; font-size: 1.2rem;"></div>
+                        <small>Proporcionais (Natal/Férias)</small>
+                        <div id="out-proporcionais" style="font-weight: 700; color: #374151;"></div>
                     </div>
                 </div>
             </div>
         </section>
 
         <article class="card info-content">
-            <h2>Quais são os seus direitos ao sair da empresa em 2026?</h2>
-            <p>Ao cessar um contrato de trabalho em Portugal, o trabalhador tem direito a receber um conjunto de valores que visam compensar o trabalho efetuado e as prestações que não foram gozadas até à data da rescisão.</p>
+            <h2>Direitos Laborais na Cessação de Contrato</h2>
+            <p>Em 2026, a cessação de um contrato de trabalho envolve diversas parcelas financeiras. Além do vencimento do último mês trabalhado, o colaborador tem direito a receber os <strong>proporcionais</strong> de subsídios e compensação por antiguidade caso a iniciativa de saída seja da empresa.</p>
             
             
 
-            <h3>Proporcionais de Subsídios</h3>
-            <p>Tem direito a receber o valor proporcional do <strong>Subsídio de Natal</strong> e do <strong>Subsídio de Férias</strong> correspondente aos meses trabalhados no ano da cessação. Se sair em Junho (mês 6), terá direito a 6/12 de cada um destes subsídios.</p>
-
-            <h3>Férias não Gozadas</h3>
-            <p>Se tem dias de férias acumulados que não gozou, a empresa é obrigada a pagar o valor desses dias, acrescido do respetivo subsídio de férias. Este simulador considera o valor diário do seu salário para calcular este montante com precisão.</p>
-
-            <h3>Indemnização por Caducidade</h3>
-            <p>Em contratos a termo que chegam ao fim por iniciativa do empregador, pode haver lugar a uma indemnização. Em 2026, as regras de compensação variam entre 12 a 24 dias de salário base por cada ano completo de trabalho, dependendo da antiguidade e do tipo de contrato.</
+            <h3>Como funciona a indemnização?</h3>
+            <p>Para contratos iniciados após as últimas reformas laborais, a compensação padrão situa-se entre 12 a 24 dias de retribuição base por cada ano de antiguidade. O cálculo é feito ao dia, dividindo o salário base por 30 para obter o valor diário de referência.</p>
+            
+            <h3>Férias e Subsídios Proporcionais</h3>
+            <p>Mesmo que o contrato termine a meio do ano, o trabalhador mantém o direito a receber o equivalente aos meses trabalhados relativos ao Subsídio de Natal e Subsídio de Férias. Além disso, quaisquer dias de férias vencidos em 1 de Janeiro e não gozados devem ser pagos na totalidade.</p>
+        </article>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

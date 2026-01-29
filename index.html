@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Rescisão Contrato 2026 | Completa com Lay-off</title>
+    <title>Simulador de Rescisão 2026 | Completo</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23059669'%3E%3Cpath d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6163421497152187" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar-global">
@@ -22,8 +23,8 @@
 
     <div class="container">
         <header style="text-align: center; margin-bottom: 30px;">
-            <h1>Simulador de Rescisão Profissional</h1>
-            <p>Cálculo exato de indemnizações, lay-off e direitos laborais em 2026.</p>
+            <h1>Calculadora de Rescisão Profissional</h1>
+            <p>Indemnizações, Lay-off, Formação e Proporcionais.</p>
         </header>
 
         <section class="card">
@@ -37,7 +38,7 @@
                     <select id="tipoContrato">
                         <option value="certo">Termo Certo</option>
                         <option value="incerto">Termo Incerto</option>
-                        <li><option value="semTermo">Sem Termo (Efetivo)</option></li>
+                        <option value="semTermo">Sem Termo (Efetivo)</option>
                         <option value="comissao">Comissão de Serviço</option>
                     </select>
                 </div>
@@ -49,7 +50,7 @@
                     <label>Data de Fim</label>
                     <input type="date" id="dataFim" value="2026-06-30">
                 </div>
-                <div class="input-group">
+                <div class="input-group" style="grid-column: span 2;">
                     <label>Motivo da Saída</label>
                     <select id="motivo">
                         <option value="caducidade_empresa">Caducidade (Iniciativa Empresa)</option>
@@ -60,5 +61,46 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>Esteve em Lay-off no último ano?</label>
-                    <select id="
+                    <label>Esteve em Lay-off este ano?</label>
+                    <select id="layoff" onchange="toggleLayoff()">
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim (Redução ou Suspensão)</option>
+                    </select>
+                </div>
+                <div class="input-group" id="campoMesesLayoff" style="display:none;">
+                    <label>Meses em Lay-off</label>
+                    <input type="number" id="mesesLayoff" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Férias não gozadas (Dias)</label>
+                    <input type="number" id="feriasNaoGozadas" value="0">
+                </div>
+                <div class="input-group">
+                    <label>Horas Formação em falta</label>
+                    <input type="number" id="horasFormacao" value="0">
+                </div>
+            </div>
+
+            <button class="btn-main" onclick="executarCalculo()">Calcular Direitos</button>
+
+            <div id="results" class="results-area" style="display: none; margin-top: 25px;">
+                <div class="res-card" style="background: #f0fdf4; border: 2px solid var(--primary); margin-bottom:15px;">
+                    <small>Total Bruto Estimado</small>
+                    <div id="out-total" class="big-val"></div>
+                </div>
+                <div class="grid-res">
+                    <div class="res-card">
+                        <small>Indemnização</small>
+                        <div id="out-indem" style="font-weight:700;"></div>
+                    </div>
+                    <div class="res-card">
+                        <small>Proporcionais</small>
+                        <div id="out-prop" style="font-weight:700;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

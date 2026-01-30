@@ -1,40 +1,51 @@
 function calcular() {
-    // 1. Obter elementos (Garantir que os IDs batem certo com o HTML)
-    const base = parseFloat(document.getElementById('base').value) || 0;
-    const dInicio = new Date(document.getElementById('dataInicio').value);
-    const dFim = new Date(document.getElementById('dataFim').value);
-    const motivo = document.getElementById('motivo').value;
-    const ferias = parseInt(document.getElementById('feriasNaoGozadas').value) || 0;
-    const layoff = parseInt(document.getElementById('mesesLayoff').value) || 0;
+    // Obter valores
+    const base = parseFloat(document.getElementById('vencBase').value) || 0;
+    const subVal = parseFloat(document.getElementById('subVal').value) || 0;
+    const meses = parseInt(document.getElementById('mesesTrab').value) || 0;
+    const fVencidas = parseInt(document.getElementById('feriasVenc').value) || 0;
+    const hForm = parseInt(document.getElementById('horasForm').value) || 0;
+    const tipo = document.getElementById('tipoRescisao').value;
 
-    // 2. Validação básica
-    if (isNaN(dInicio) || isNaN(dFim) || dFim < dInicio) {
-        alert("Por favor, introduza datas válidas.");
+    if (base <= 0) {
+        alert("Introduza o vencimento base.");
         return;
     }
 
-    // 3. Cálculo de Antiguidade
-    const anos = (dFim - dInicio) / (1000 * 60 * 60 * 24 * 365.25);
-
-    // 4. Indemnização (Só se for iniciativa da empresa ou caducidade)
-    let indemnizacao = 0;
-    if (motivo !== 'demissao') {
-        indemnizacao = (base / 30) * 14 * anos; 
-    }
-
-    // 5. Proporcionais e Férias
-    const mesSaida = dFim.getMonth() + 1;
-    const propNatal = (base * (mesSaida - (layoff * 0.5))) / 12;
-    const propFerias = (base * mesSaida) / 12;
-    const valorDia = base / 22;
-    const totalFerias = ferias * valorDia * 2; // Dias + Subsídio
-
-    const resultadoFinal = indemnizacao + propNatal + propFerias + totalFerias;
-
-    // 6. Exibir resultado
-    const resDiv = document.getElementById('results');
-    resDiv.style.display = 'block';
-    document.getElementById('out-total').innerText = "€ " + resultadoFinal.toFixed(2);
+    // 1. Compensação (Lógica ACT: 24 dias para termo, 14 para extinção)
+    let diasComp = 0;
+    if (tipo === 'cad_termo_certo' || tipo === 'cad_termo_incerto') diasComp = 24;
+    else if (tipo === 'extincao') diasComp = 14;
     
-    console.log("Cálculo efetuado: ", resultadoFinal);
+    // Simplificação ACT: (Base / 30) * diasComp (por ano, aqui simulamos o valor base de referência)
+    const compensacao = (base / 30) * diasComp;
+
+    // 2. Férias e Proporcionais
+    const valorDia = base / 22;
+    const feriasVencidasTotal = fVencidas * valorDia * 2; // Dias de férias + Subsídio de férias
+    
+    const propNatal = (base / 12) * meses;
+    const propFerias = (base / 12) * meses * 2; // Proporcional de férias + Proporcional de subsídio
+
+    // 3. Formação
+    const valorHora = (base * 12) / (52 * 40);
+    const formacao = hForm * valorHora;
+
+    // 4. Último Mês e Subsídio de Refeição
+    const subMensal = subVal * 22;
+    const ultimoMes = base + subMensal;
+
+    // Totais
+    const totalBruto = compensacao + feriasVencidasTotal + propNatal + propFerias + formacao + ultimoMes;
+
+    // Formatação e Exibição
+    document.getElementById('r-comp').innerText = compensacao.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+    document.getElementById('r-fer-venc').innerText = feriasVencidasTotal.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+    document.getElementById('r-prop').innerText = (propNatal + propFerias).toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+    document.getElementById('r-form').innerText = formacao.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+    document.getElementById('r-mes').innerText = ultimoMes.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+    document.getElementById('r-total').innerText = totalBruto.toLocaleString('pt-PT', { style: 'currency', currency: 'EUR' });
+
+    document.getElementById('results').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('results').offsetTop, behavior: 'smooth' });
 }

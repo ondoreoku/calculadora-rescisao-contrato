@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Rescisão de Contrato 2026 | ACT</title>
+    <title>Simulador de Rescisão Completo 2026 | Antiguidade e Lay-off</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23059669'%3E%3Cpath d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -23,71 +23,71 @@
 
     <div class="container">
         <header style="text-align: center; margin-bottom: 20px;">
-            <h1>Simulador de Rescisão de Contrato</h1>
-            <div style="color: #d97706; font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-certificate"></i></div>
+            <h1>Calculadora de Rescisão Profissional</h1>
+            <p>Compensação detalhada com antiguidade, lay-off e formação.</p>
         </header>
 
         <div class="card">
             <div class="grid">
-                <div class="input-group full">
+                <div class="input-group">
                     <label><i class="fas fa-money-bill-wave"></i> Vencimento Base Bruto (€)</label>
-                    <input type="number" id="vencBase" placeholder="Ex: 1200">
+                    <input type="number" id="vencBase" value="1200">
                 </div>
-
                 <div class="input-group">
                     <label><i class="fas fa-utensils"></i> Subsídio Refeição/Dia (€)</label>
                     <input type="number" id="subVal" value="9.60" step="0.10">
                 </div>
-
                 <div class="input-group">
-                    <label>Meses trabalhados (ano corrente)</label>
-                    <input type="number" id="mesesTrab" value="6" min="1" max="12">
+                    <label>Data de Início do Contrato</label>
+                    <input type="date" id="dataInicio" value="2024-01-01">
                 </div>
-
+                <div class="input-group">
+                    <label>Data de Fim (Rescisão)</label>
+                    <input type="date" id="dataFim" value="2026-06-30">
+                </div>
                 <div class="input-group full">
-                    <label>Motivo da Rescisão</label>
-                    <select id="tipoRescisao">
-                        <option value="cad_termo_certo">Caducidade Contrato Termo Certo</option>
-                        <option value="cad_termo_incerto">Caducidade Contrato Termo Incerto</option>
-                        <option value="extincao">Extinção Posto Trabalho / Coletivo</option>
-                        <option value="demissao">Pedido de Demissão (Trabalhador)</option>
+                    <label>Motivo da Saída</label>
+                    <select id="motivo">
+                        <option value="caducidade_termo">Caducidade de Contrato a Termo</option>
+                        <option value="despedimento_coletivo">Despedimento Coletivo / Extinção de Posto</option>
+                        <option value="mutuo_acordo">Mútuo Acordo (Com Indemnização)</option>
+                        <option value="justa_causa_trabalhador">Rescisão com Justa Causa (Trabalhador)</option>
+                        <option value="demissao_trabalhador">Pedido de Demissão (Trabalhador)</option>
                     </select>
                 </div>
-
+                <div class="input-group">
+                    <label>Meses de Lay-off (ano corrente)</label>
+                    <input type="number" id="mesesLayoff" value="0" min="0" max="12">
+                </div>
                 <div class="input-group">
                     <label>Férias não gozadas (Dias)</label>
                     <input type="number" id="feriasVenc" value="0">
                 </div>
-
-                <div class="input-group">
-                    <label>Horas Formação em falta</label>
+                <div class="input-group full">
+                    <label>Horas de Formação em dívida (máx. 120h)</label>
                     <input type="number" id="horasForm" value="0">
                 </div>
             </div>
 
             <button class="btn-main" onclick="calcular()">
-                <i class="fas fa-stamp"></i> CALCULAR VALORES FINAIS
+                <i class="fas fa-calculator"></i> CALCULAR VALORES FINAIS
             </button>
 
             <div id="results" class="results-area" style="display: none; margin-top: 25px;">
-                <div class="res-line"><span>Compensação / Indemnização:</span> <span id="r-comp">0,00 €</span></div>
+                <div class="res-line"><span>Antiguidade Calculada:</span> <span id="r-anos" style="font-weight:bold;">-</span></div>
+                <div class="res-line"><span>Compensação por Antiguidade:</span> <span id="r-comp">0,00 €</span></div>
+                <div class="res-line"><span>Proporcionais Férias/Natal (Ajustado Lay-off):</span> <span id="r-prop">0,00 €</span></div>
                 <div class="res-line"><span>Férias não gozadas + Subsídio:</span> <span id="r-fer-venc">0,00 €</span></div>
-                <div class="res-line"><span>Proporcionais (Natal e Férias):</span> <span id="r-prop">0,00 €</span></div>
                 <div class="res-line"><span>Créditos de Formação:</span> <span id="r-form">0,00 €</span></div>
-                <div class="res-line"><span>Último mês (Estimativa c/ subsídio):</span> <span id="r-mes">0,00 €</span></div>
+                <div class="res-line"><span>Último Mês (Vencimento + Refeição):</span> <span id="r-mes">0,00 €</span></div>
 
-                <div class="total-box" style="background: var(--primary); color: white; padding: 20px; border-radius: 8px; text-align: center; margin-top: 15px;">
-                    <div style="font-size: 0.8rem; text-transform: uppercase; opacity: 0.9;">Total Bruto Estimado</div>
-                    <div id="r-total" style="font-size: 2rem; font-weight: 800;">0,00 €</div>
+                <div class="total-box" style="background: var(--primary); color: white; padding: 25px; border-radius: 8px; text-align: center; margin-top: 20px;">
+                    <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Total Bruto a Receber</div>
+                    <div id="r-total" style="font-size: 2.2rem; font-weight: 800;">0,00 €</div>
                 </div>
             </div>
         </div>
-        
-        <div class="footer-legal" style="text-align: center; margin-top: 20px; font-size: 0.8rem; color: #64748b;">
-            As fontes de cálculo baseiam-se no Código do Trabalho vigente (ACT) para 2026.
-        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,36 +1,40 @@
-function executarCalculo() {
+function calcular() {
+    // 1. Obter elementos (Garantir que os IDs batem certo com o HTML)
     const base = parseFloat(document.getElementById('base').value) || 0;
-    const dataInicio = new Date(document.getElementById('dataInicio').value);
-    const dataFim = new Date(document.getElementById('dataFim').value);
-    const feriasNaoGozadas = parseInt(document.getElementById('feriasNaoGozadas').value) || 0;
+    const dInicio = new Date(document.getElementById('dataInicio').value);
+    const dFim = new Date(document.getElementById('dataFim').value);
     const motivo = document.getElementById('motivo').value;
-    const mesesLayoff = parseInt(document.getElementById('mesesLayoff').value) || 0;
+    const ferias = parseInt(document.getElementById('feriasNaoGozadas').value) || 0;
+    const layoff = parseInt(document.getElementById('mesesLayoff').value) || 0;
 
-    if (isNaN(dataInicio) || isNaN(dataFim)) {
-        alert("Insira as datas corretamente.");
+    // 2. Validação básica
+    if (isNaN(dInicio) || isNaN(dFim) || dFim < dInicio) {
+        alert("Por favor, introduza datas válidas.");
         return;
     }
 
-    // 1. Antiguidade
-    const anos = (dataFim - dataInicio) / (1000 * 60 * 60 * 24 * 365.25);
+    // 3. Cálculo de Antiguidade
+    const anos = (dFim - dInicio) / (1000 * 60 * 60 * 24 * 365.25);
 
-    // 2. Indemnização
-    let indem = 0;
+    // 4. Indemnização (Só se for iniciativa da empresa ou caducidade)
+    let indemnizacao = 0;
     if (motivo !== 'demissao') {
-        indem = (base / 30) * 14 * anos;
+        indemnizacao = (base / 30) * 14 * anos; 
     }
 
-    // 3. Proporcionais (Ajuste Lay-off)
-    const mesSaida = dataFim.getMonth() + 1;
-    let propNatal = (base * (mesSaida - (mesesLayoff * 0.5))) / 12;
-    let propFerias = (base * mesSaida) / 12;
-
-    // 4. Férias não gozadas
+    // 5. Proporcionais e Férias
+    const mesSaida = dFim.getMonth() + 1;
+    const propNatal = (base * (mesSaida - (layoff * 0.5))) / 12;
+    const propFerias = (base * mesSaida) / 12;
     const valorDia = base / 22;
-    const totalFerias = feriasNaoGozadas * valorDia * 2; // Dias + Subsídio
+    const totalFerias = ferias * valorDia * 2; // Dias + Subsídio
 
-    const total = indem + propNatal + propFerias + totalFerias;
+    const resultadoFinal = indemnizacao + propNatal + propFerias + totalFerias;
 
-    document.getElementById('results').style.display = 'block';
-    document.getElementById('out-total').innerText = "€" + total.toFixed(2);
+    // 6. Exibir resultado
+    const resDiv = document.getElementById('results');
+    resDiv.style.display = 'block';
+    document.getElementById('out-total').innerText = "€ " + resultadoFinal.toFixed(2);
+    
+    console.log("Cálculo efetuado: ", resultadoFinal);
 }
